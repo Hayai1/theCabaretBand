@@ -9,35 +9,37 @@
 </head>
 
 <body>
-<div class="social" id="socialMenu">
-      <a href="https://facebook.com/yourname" target="_blank" rel="noopener" aria-label="Facebook"><img src="{% static 'main/icons/facebook.svg' %}" alt=""></a>
-      <a href="https://instagram.com/thephdband/" target="_blank" rel="noopener" aria-label="Instagram"><img src="{% static 'main/icons/instagram.svg' %}" alt=""></a>
-      <a href="https://twitter.com/yourname" target="_blank" rel="noopener" aria-label="X (Twitter)"><img src="{% static 'main/icons/itunes.svg' %}" alt=""></a>
-      <a href="https://www.youtube.com/@ThePHDBand" target="_blank" rel="noopener" aria-label="YouTube"><img src="{% static 'main/icons/youtube.svg' %}" alt=""></a>
-      <a href="https://tiktok.com/@yourname" target="_blank" rel="noopener" aria-label="TikTok"><img src="{% static 'main/icons/tiktok.svg' %}" alt=""></a>
-      <a href="https://open.spotify.com/user/yourname" target="_blank" rel="noopener" aria-label="Spotify"><img src="{% static 'main/icons/spotify.svg' %}" alt=""></a>
-      <a href="https://soundcloud.com/yourname" target="_blank" rel="noopener" aria-label="SoundCloud"><img src="{% static 'main/icons/soundcloud.svg' %}" alt=""></a>
-      
-      <!-- CONTACT FORM in mobile menu -->
-      <div class="contact-form-mobile">
-        <form class="contact-form" id="contactFormMobile">
-          <h2>Get in Touch</h2>
-          <div class="form-group">
-            <input type="text" name="name" placeholder="Your Name" required>
-          </div>
-          <div class="form-group">
-            <input type="email" name="email" placeholder="Your Email" required>
-          </div>
-          <div class="form-group">
-            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-      </div>
+  <!-- Mobile menu with social icons -->
+  <div class="social" id="socialMenu">
+    <a href="https://facebook.com/yourname" target="_blank" rel="noopener" aria-label="Facebook"><img src="{% static 'main/icons/facebook.svg' %}" alt=""></a>
+    <a href="https://instagram.com/yourname" target="_blank" rel="noopener" aria-label="Instagram"><img src="{% static 'main/icons/instagram.svg' %}" alt=""></a>
+    <a href="https://twitter.com/yourname" target="_blank" rel="noopener" aria-label="X (Twitter)"><img src="{% static 'main/icons/itunes.svg' %}" alt=""></a>
+    <a href="https://youtube.com/@yourname" target="_blank" rel="noopener" aria-label="YouTube"><img src="{% static 'main/icons/youtube.svg' %}" alt=""></a>
+    <a href="https://tiktok.com/@yourname" target="_blank" rel="noopener" aria-label="TikTok"><img src="{% static 'main/icons/tiktok.svg' %}" alt=""></a>
+    <a href="https://open.spotify.com/user/yourname" target="_blank" rel="noopener" aria-label="Spotify"><img src="{% static 'main/icons/spotify.svg' %}" alt=""></a>
+    <a href="https://soundcloud.com/yourname" target="_blank" rel="noopener" aria-label="SoundCloud"><img src="{% static 'main/icons/soundcloud.svg' %}" alt=""></a>
+    
+    <!-- MOBILE CONTACT FORM -->
+    <div class="contact-form-mobile">
+      <form class="contact-form" method="POST" action="{% url 'main:index' %}">
+        {% csrf_token %}
+        <h2>Contact Us</h2>
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
     </div>
+  </div>
+
   <!-- HERO -->
   <section class="hero">
-    <!-- Use <picture> so phone gets the phone image -->
     <picture>
       <img src="{% static 'main/images/bgnewlogo.jpg' %}" alt="">
     </picture>
@@ -51,12 +53,22 @@
       aria-label="Open social menu"
     >☰</button>
 
-    <!-- Social icons -->
-    
-    <!-- CONTACT FORM (desktop version) -->
+    <!-- DESKTOP CONTACT FORM -->
     <div class="contact-form-section desktop-form">
-      <form class="contact-form" id="contactFormDesktop">
-        <h2>Get in Touch</h2>
+      <form class="contact-form" method="POST" action="{% url 'main:index' %}">
+        {% csrf_token %}
+        <h2>Contact Us</h2>
+        
+        {% if messages %}
+          <div style="margin-bottom: 15px;">
+            {% for message in messages %}
+              <div style="padding: 10px; background: {% if message.tags == 'success' %}#d4edda{% else %}#f8d7da{% endif %}; border-radius: 5px; margin-bottom: 10px;">
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+        
         <div class="form-group">
           <input type="text" name="name" placeholder="Your Name" required>
         </div>
@@ -71,7 +83,7 @@
     </div>
 
     <!-- VIDEO SECTION -->
-<div class="video-section">
+    <div class="video-section">
   <div class="video-container">
     <iframe 
       src="https://www.youtube-nocookie.com/embed/FAzaIb6wQ5E?controls=1&rel=0&modestbranding=1" 
@@ -84,19 +96,32 @@
 </div>
   </section>
 
-  <!-- CONTENT (will start exactly after image height) -->
-  <section class="content" id="listSection">
-    <div class="wrap">
-      <h2>List of Items</h2>
-      <p>Replace these with your real items.</p>
-
+  <!-- CONTENT -->
+  <!-- CONTENT (tour dates section) -->
+<section class="content" id="listSection">
+  <div class="wrap">
+    <h2>Upcoming Tour Dates</h2>
+    
+    {% if tours %}
       <ul class="vintage-list">
-        <li><strong>Item One</strong><span>Short description or details go here.</span></li>
-        <li><strong>Item Two</strong><span>Another description line. Add as many items as you like.</span></li>
-        <li><strong>Item Three</strong><span>Links, dates, prices, whatever you need.</span></li>
+        {% for tour in tours %}
+          <li>
+            <strong>{{ tour.date|date:"F d, Y" }} - {{ tour.venue }}</strong>
+            <span>{{ tour.city }}, {{ tour.country }}</span>
+            {% if tour.ticket_link %}
+              <a href="{{ tour.ticket_link }}" target="_blank" 
+                 style="display: inline-block; margin-top: 8px; padding: 8px 16px; background: #1c1c1c; color: white; text-decoration: none; border-radius: 6px; font-size: 13px;">
+                Get Tickets
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
       </ul>
-    </div>
-  </section>
+    {% else %}
+      <p>No upcoming tour dates at the moment. Check back soon!</p>
+    {% endif %}
+  </div>
+</section>
 
   <script src="{% static 'main/js/script.js' %}"></script>
 </body>
