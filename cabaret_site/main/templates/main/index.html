@@ -1,0 +1,103 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Cabaret</title>
+  <link rel="stylesheet" href="{% static 'main/css/styles.css' %}">
+</head>
+
+<body>
+<div class="social" id="socialMenu">
+      <a href="https://facebook.com/yourname" target="_blank" rel="noopener" aria-label="Facebook"><img src="{% static 'main/icons/facebook.svg' %}" alt=""></a>
+      <a href="https://instagram.com/thephdband/" target="_blank" rel="noopener" aria-label="Instagram"><img src="{% static 'main/icons/instagram.svg' %}" alt=""></a>
+      <a href="https://twitter.com/yourname" target="_blank" rel="noopener" aria-label="X (Twitter)"><img src="{% static 'main/icons/itunes.svg' %}" alt=""></a>
+      <a href="https://www.youtube.com/@ThePHDBand" target="_blank" rel="noopener" aria-label="YouTube"><img src="{% static 'main/icons/youtube.svg' %}" alt=""></a>
+      <a href="https://tiktok.com/@yourname" target="_blank" rel="noopener" aria-label="TikTok"><img src="{% static 'main/icons/tiktok.svg' %}" alt=""></a>
+      <a href="https://open.spotify.com/user/yourname" target="_blank" rel="noopener" aria-label="Spotify"><img src="{% static 'main/icons/spotify.svg' %}" alt=""></a>
+      <a href="https://soundcloud.com/yourname" target="_blank" rel="noopener" aria-label="SoundCloud"><img src="{% static 'main/icons/soundcloud.svg' %}" alt=""></a>
+      
+      <!-- CONTACT FORM in mobile menu -->
+      <div class="contact-form-mobile">
+        <form class="contact-form" id="contactFormMobile">
+          <h2>Get in Touch</h2>
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  <!-- HERO -->
+  <section class="hero">
+    <!-- Use <picture> so phone gets the phone image -->
+    <picture>
+      <img src="{% static 'main/images/bgnewlogo.jpg' %}" alt="">
+    </picture>
+
+    <!-- Mobile toggle button -->
+    <button
+      class="social-toggle"
+      id="socialToggle"
+      aria-expanded="false"
+      aria-controls="socialMenu"
+      aria-label="Open social menu"
+    >☰</button>
+
+    <!-- Social icons -->
+    
+    <!-- CONTACT FORM (desktop version) -->
+    <div class="contact-form-section desktop-form">
+      <form class="contact-form" id="contactFormDesktop">
+        <h2>Get in Touch</h2>
+        <div class="form-group">
+          <input type="text" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+
+    <!-- VIDEO SECTION -->
+<div class="video-section">
+  <div class="video-container">
+    <iframe 
+      src="https://www.youtube-nocookie.com/embed/FAzaIb6wQ5E?controls=1&rel=0&modestbranding=1" 
+      title="YouTube video player" 
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen>
+    </iframe>
+  </div>
+</div>
+  </section>
+
+  <!-- CONTENT (will start exactly after image height) -->
+  <section class="content" id="listSection">
+    <div class="wrap">
+      <h2>List of Items</h2>
+      <p>Replace these with your real items.</p>
+
+      <ul class="vintage-list">
+        <li><strong>Item One</strong><span>Short description or details go here.</span></li>
+        <li><strong>Item Two</strong><span>Another description line. Add as many items as you like.</span></li>
+        <li><strong>Item Three</strong><span>Links, dates, prices, whatever you need.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <script src="{% static 'main/js/script.js' %}"></script>
+</body>
+</html>
